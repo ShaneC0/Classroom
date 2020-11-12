@@ -10,6 +10,7 @@ class Signup extends React.Component {
       password: "",
       confirmPassword: "",
       currentStep: 1,
+      error: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,11 +34,14 @@ class Signup extends React.Component {
         password: this.state.password,
       })
       .then((response) => {
+        console.log(response)
         if (response.status === 200 && response.data.token) {
           localStorage.token = response.data.token;
           this.props.setUser();
           this.props.history.push("/classes");
         }
+      }).catch(error => {
+        this.setState({error: error.message})
       });
   }
 
@@ -46,6 +50,7 @@ class Signup extends React.Component {
       <section>
         <form>
           <h2>Sign up</h2>
+          {this.state.error}
           {this.state.currentStep === 1 ? (
             <>
               <input
@@ -56,14 +61,16 @@ class Signup extends React.Component {
                 placeholder="Email"
               />
 
-              <Link to="/signin">Sign in</Link>
-              <button
-                onClick={() =>
-                  this.setState({ currentStep: this.state.currentStep + 1 })
-                }
-              >
-                Next
-              </button>
+              <div className="form-actions">
+                <Link to="/signin">Sign in</Link>
+                <button
+                  onClick={() =>
+                    this.setState({ currentStep: this.state.currentStep + 1 })
+                  }
+                >
+                  Next
+                </button>
+              </div>
             </>
           ) : null}
 
@@ -84,15 +91,16 @@ class Signup extends React.Component {
                 placeholder="Confirm password"
               />
 
-              <button
-                onClick={() =>
-                  this.setState({ currentStep: this.state.currentStep - 1 })
-                }
-              >
-                Back
-              </button>
-              <Link to="/signin">Sign in</Link>
-              <button onClick={(e) => this.handleSubmit(e)}>Next</button>
+              <div className="form-actions">
+                <button
+                  onClick={() =>
+                    this.setState({ currentStep: this.state.currentStep - 1 })
+                  }
+                >
+                  Back
+                </button>
+                <button onClick={(e) => this.handleSubmit(e)}>Next</button>
+              </div>
             </>
           ) : null}
         </form>

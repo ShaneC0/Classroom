@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import authSchema from "../schema/auth.schema";
 
 class Signin extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Signin extends React.Component {
       password: "",
       confirmPassword: "",
       currentStep: 1,
+      errors: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +29,13 @@ class Signin extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    authSchema
+      .validate({ email: this.state.email, password: this.state.password })
+      .catch((err) => {
+        this.setState({ errors: err.errors })
+        console.log(this.state.errors)
+      });
+
     axios
       .post("http://localhost:5000/api/v1/auth/signin", {
         email: this.state.email,
@@ -38,6 +47,9 @@ class Signin extends React.Component {
           this.props.setUser();
           this.props.history.push("/classes");
         }
+      })
+      .catch((error) => {
+        this.setState({ errors: error.errors });
       });
   }
 
@@ -56,14 +68,16 @@ class Signin extends React.Component {
                 placeholder="Email"
               />
 
-              <Link to="/signup">Create account</Link>
-              <button
-                onClick={() =>
-                  this.setState({ currentStep: this.state.currentStep + 1 })
-                }
-              >
-                Next
-              </button>
+              <div className="form-actions">
+                <Link to="/signup">Create account</Link>
+                <button
+                  onClick={() =>
+                    this.setState({ currentStep: this.state.currentStep + 1 })
+                  }
+                >
+                  Next
+                </button>
+              </div>
             </>
           ) : null}
 
@@ -76,16 +90,16 @@ class Signin extends React.Component {
                 name="password"
                 placeholder="Password"
               />
-
-              <button
-                onClick={() =>
-                  this.setState({ currentStep: this.state.currentStep - 1 })
-                }
-              >
-                Back
-              </button>
-              <Link to="/signup">Create account</Link>
-              <button onClick={(e) => this.handleSubmit(e)}>Next</button>
+              <div className="form-actions">
+                <button
+                  onClick={() =>
+                    this.setState({ currentStep: this.state.currentStep - 1 })
+                  }
+                >
+                  Back
+                </button>
+                <button onClick={(e) => this.handleSubmit(e)}>Next</button>
+              </div>
             </>
           ) : null}
         </form>

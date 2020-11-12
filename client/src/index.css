@@ -8,6 +8,11 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: gray;
+}
+
 button {
   border: none;
   cursor: pointer;
@@ -36,10 +41,15 @@ nav i {
   margin-right: 2vw;
 }
 
+nav a {
+  color: black;
+}
+
+
+
 section {
-  height: 90vh;
+  height: 93vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -75,7 +85,17 @@ form button {
   border-radius: 8%;
   color: white;
   font-size: 16px;
-  margin-left: 100%;
+}
+
+form a {
+  color: rgb(1, 119, 255)
+}
+
+.form-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sidebar {
@@ -83,7 +103,7 @@ form button {
   top: 7vh;
   left: 0px;
   width: 15vw;
-  height: 90vh;
+  height: 93vh;
   border-right: 1px solid rgb(197, 197, 197);
   display: flex;
   flex-direction: column;
@@ -122,4 +142,21 @@ form button {
 
 .menu-disabled {
   display: none;
+}
+
+.landing h1 {
+  font-size: 96px;
+  font-weight: 300;
+}
+
+.class-card {
+  width: 20vw;
+  height: 30vh;
+  border: 1px solid lightgray;
+  padding: 2%;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  border-radius: 6px;
 }

@@ -17,7 +17,6 @@ app.use(express.json());
 
 app.use("/api/v1", checkTokenSetUser, apiRouter);
 
-//add not found handler
 
 function notFound(req, res, next) {
   res.status(404)

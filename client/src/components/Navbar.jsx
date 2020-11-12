@@ -3,10 +3,12 @@ import { useState } from "react";
 
 function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
+  const [classMenu, setClassMenu] = useState(false);
   const [menu, setMenu] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
   const showMenu = () => setMenu(!menu);
+  const showClassMenu = () => setClassMenu(!classMenu);
 
   return (
     <>
@@ -22,7 +24,7 @@ function Navbar(props) {
           </div>
 
           <div>
-            <button>
+            <button onClick={showClassMenu}>
               <i className="fas fa-plus nav-item"></i>
             </button>
 
@@ -37,7 +39,9 @@ function Navbar(props) {
         <ul>
           {props.loggedIn ? (
             <>
-              <li onClick={() => props.logOut()}>Log out</li>
+              <li onClick={() => props.logOut()}>
+                <Link to="">Log Out</Link>
+              </li>
             </>
           ) : (
             <>
@@ -52,9 +56,22 @@ function Navbar(props) {
         </ul>
       </div>
 
+      <div className={classMenu ? "menu" : "menu-disabled"}>
+        <ul>
+          <li>
+            <Link to="">Join class</Link>
+          </li>
+          <li>
+            <Link to="">Create class</Link>
+          </li>
+        </ul>
+      </div>
+
       <div className={sidebar ? "sidebar" : "sidebar-disabled"}>
         <ul>
-          <li><Link to="/classes">Classes</Link></li>
+          <li>
+            <Link to="/classes">Classes</Link>
+          </li>
           <li>Calendar</li>
         </ul>
       </div>
