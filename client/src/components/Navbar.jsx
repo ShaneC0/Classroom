@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Navbar() {
+function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
   const [menu, setMenu] = useState(false);
 
@@ -29,21 +29,32 @@ function Navbar() {
             <button onClick={showMenu}>
               <i className="fas fa-circle nav-item"></i>
             </button>
-
           </div>
         </nav>
       </header>
 
       <div className={menu ? "menu" : "menu-disabled"}>
         <ul>
-          <li><Link to="/signin">Sign in</Link></li>
-          <li><Link to="/signup">Create account</Link></li>
+          {props.loggedIn ? (
+            <>
+              <li onClick={() => props.logOut()}>Log out</li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/signin">Sign in</Link>
+              </li>
+              <li>
+                <Link to="/signup">Create account</Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
 
       <div className={sidebar ? "sidebar" : "sidebar-disabled"}>
         <ul>
-          <li>Classes</li>
+          <li><Link to="/classes">Classes</Link></li>
           <li>Calendar</li>
         </ul>
       </div>

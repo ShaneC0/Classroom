@@ -12,11 +12,7 @@ const authRouter = Router();
 authRouter.post("/signup", async (req, res, next) => {
   const repository = getRepository(User);
 
-  const validBody = await authSchema.isValid({ ...req.body });
-
-  if (!validBody) {
-    return next(new Error("Validation Error"));
-  }
+  await authSchema.validate({ ...req.body }).catch((err) => next(err));
 
   const existingUser = await repository.findOne({ email: req.body.email });
 
@@ -55,11 +51,7 @@ authRouter.post("/signup", async (req, res, next) => {
 authRouter.post("/signin", async (req, res, next) => {
   const repository = getRepository(User);
 
-  const validBody = await authSchema.isValid({ ...req.body });
-
-  if (!validBody) {
-    return next(new Error("Validation Error"));
-  }
+  await authSchema.validate({ ...req.body }).catch((err) => next(err));
 
   const existingUser = await repository.findOne({ email: req.body.email });
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 class Signin extends React.Component {
   constructor(props) {
@@ -27,16 +27,18 @@ class Signin extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    axios.post('http://localhost:5000/api/v1/auth/signin', {
-      email: this.state.email,
-      password: this.state.password
-    }).then(response => {
-      if(response.status === 200) {
-        localStorage.token = response.data.token;
-        this.props.history.push('/classes')
-      }
-    })
-
+    axios
+      .post("http://localhost:5000/api/v1/auth/signin", {
+        email: this.state.email,
+        password: this.state.password,
+      })
+      .then((response) => {
+        if (response.status === 200 && response.data.token) {
+          localStorage.token = response.data.token;
+          this.props.setUser();
+          this.props.history.push("/classes");
+        }
+      });
   }
 
   render() {

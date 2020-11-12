@@ -27,15 +27,18 @@ class Signup extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    axios.post('http://localhost:5000/api/v1/auth/signup', {
-      email: this.state.email,
-      password: this.state.password
-    }).then(response => {
-      if(response.status === 200) {
-        localStorage.token = response.data.token;
-        this.props.history.push('/classes')  
-      }
-    })
+    axios
+      .post("http://localhost:5000/api/v1/auth/signup", {
+        email: this.state.email,
+        password: this.state.password,
+      })
+      .then((response) => {
+        if (response.status === 200 && response.data.token) {
+          localStorage.token = response.data.token;
+          this.props.setUser();
+          this.props.history.push("/classes");
+        }
+      });
   }
 
   render() {
