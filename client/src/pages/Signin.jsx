@@ -33,6 +33,7 @@ class Signin extends React.Component {
     }).then(response => {
       if(response.status === 200) {
         localStorage.token = response.data.token;
+        this.props.history.push('/classes')
       }
     })
 

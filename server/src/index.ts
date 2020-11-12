@@ -15,6 +15,8 @@ app.use(express.json());
 
 app.use("/api/v1", apiRouter);
 
+//add not found handler
+
 app.use((err, req, res, next) => {
   res.json({ message: err.message, stack: err.stack });
   next(err);

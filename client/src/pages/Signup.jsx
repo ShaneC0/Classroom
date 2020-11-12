@@ -32,7 +32,8 @@ class Signup extends React.Component {
       password: this.state.password
     }).then(response => {
       if(response.status === 200) {
-        localStorage.token = response.data.token;      
+        localStorage.token = response.data.token;
+        this.props.history.push('/classes')  
       }
     })
   }
