@@ -130,6 +130,8 @@ form a {
   left: 85vw;
   width: 15vw;
   border: 1px solid lightgray;
+
+  background: white;
 }
 
 .menu li {

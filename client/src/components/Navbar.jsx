@@ -66,7 +66,7 @@ function Navbar(props) {
             <Link to="">Join class</Link>
           </li>
           <li>
-            <Link to="">Create class</Link>
+            <Link to="/createclass">Create class</Link>
           </li>
         </ul>
       </div>

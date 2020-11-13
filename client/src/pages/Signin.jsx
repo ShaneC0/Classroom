@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import authSchema from "../schema/auth.schema";
 
 class Signin extends React.Component {
@@ -9,7 +8,6 @@ class Signin extends React.Component {
     this.state = {
       email: "",
       password: "",
-      confirmPassword: "",
       currentStep: 1,
       errors: [],
     };
@@ -26,29 +24,30 @@ class Signin extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
 
     //validate body
     //stop if validation fails
     //display validation errors
 
-    axios
-      .post("http://localhost:5000/api/v1/auth/signin", {
+    //handle errors on requests
+
+    const response = await fetch('http://localhost:5000/api/v1/auth/signin', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password,
+        password: this.state.password
       })
-      .then((response) => {
-        if (response.status === 200 && response.data.token) {
-          localStorage.token = response.data.token;
-          this.props.setUser();
-          this.props.history.push("/classes");
-        }
-      })
-      .catch((error) => {
-        this.setState({ errors: error.errors });
-        //push server errors onto the end of state errors
-      });
+    })
+
+    const data = await response.json()
+
+    localStorage.token = data.token
+    await this.props.setUser()
+    this.props.history.push("/classes")
+
   }
 
   render() {

@@ -1,5 +1,5 @@
 import { IsInt, Length } from "class-validator";
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany} from "typeorm";
 import User from "./User";
 
 @Entity()
@@ -16,7 +16,7 @@ export default class Lesson {
     @IsInt()
     period: number;
 
-    @ManyToOne(() => User, user => user.lessons)
+    @ManyToOne(() => User, user => user.teachingLessons)
     teacher: User;
 
     @Column()

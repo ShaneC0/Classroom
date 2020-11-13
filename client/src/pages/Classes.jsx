@@ -1,5 +1,4 @@
 import React from "react";
-import * as axios from "axios";
 
 import Classcard from "../components/Classcard";
 
@@ -11,18 +10,16 @@ class Classes extends React.Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:5000/api/v1/lesson/all", {
+  async componentDidMount() {
+        const response = await fetch('http://localhost:5000/api/v1/lesson/all', {
         headers: {
-          Authorization: `Bearer ${localStorage.token}`,
-        },
-      })
-      .then((res) => {
-        if (res.data.lessons) {
-          this.setState({ classes: res.data.lessons });
+          'Authorization': `Bearer ${localStorage.token}`
         }
-      });
+      })
+
+      const data = await response.json()
+
+      this.setState({classes: data.lessons})
   }
 
   render() {

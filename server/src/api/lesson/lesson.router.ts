@@ -7,8 +7,9 @@ import lessonSchema from "./lesson.schema";
 const lessonRouter = Router();
 
 lessonRouter.get("/all", async (req, res, next) => {
+    //returns all lessons where the teacher id is the same as req.user from token
     const repository = getRepository(Lesson)
-    const allLessons = await repository.find();
+    const allLessons = await repository.find({teacherId: req.user.id});
     return res.json({lessons: allLessons})
 });
 
@@ -31,8 +32,8 @@ lessonRouter.post("/create", async(req, res, next) => {
     //save class object
     await repository.save(createdLesson)
     //return class object
-    const savedClass = await repository.findOne({name: req.body.name})
-    return res.json({lesson: savedClass})
+    const savedLesson = await repository.findOne({name: req.body.name})
+    return res.json({lesson: savedLesson})
 })
 
 lessonRouter.post("/join/:id", async(req, res, next) => {

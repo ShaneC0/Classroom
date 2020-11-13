@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
 
 import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Classes from "./pages/Classes";
+import CreateClass from "./pages/CreateClass"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 
@@ -19,17 +19,19 @@ class App extends React.Component {
     this.logOut = this.logOut.bind(this);
   }
 
-  componentDidMount() {
-    this.setUser()
+  async componentDidMount() {
+    await this.setUser()
   }
 
-  setUser() {
+  async setUser() {
     if(localStorage.token) {
-      axios.get('http://localhost:5000/api/v1/', {
+      const response = await fetch('http://localhost:5000/api/v1/', {
         headers: {
           'Authorization': `Bearer ${localStorage.token}`
         }
-      }).then(res => this.setState({user: res.data.user}))
+      })
+      const data = await response.json()
+      this.setState({user: data.user})
     }
   }
 
@@ -46,6 +48,7 @@ class App extends React.Component {
           <Route path="/signup" render={props => <Signup {...props} setUser={this.setUser} />} />
           <Route path="/signin" render={props => <Signin {...props} setUser={this.setUser} />} />
           <Route path="/classes" render={props => <Classes {...props} user={this.state.user} />} />
+          <Route path="/createclass" component={CreateClass} />
           <Route path="/" component={Landing} />
         </Switch>
       </Router>

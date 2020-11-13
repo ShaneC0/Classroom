@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -25,23 +24,25 @@ class Signup extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/api/v1/auth/signup", {
+    //handle request errors
+
+    const response = await fetch('http://localhost:5000/api/v1/auth/signup', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password,
+        password: this.state.password
       })
-      .then((response) => {
-        if (response.status === 200 && response.data.token) {
-          localStorage.token = response.data.token;
-          this.props.setUser();
-          this.props.history.push("/classes");
-        }
-      }).catch(error => {
-        this.setState({error: error.message})
-      });
+    })
+
+    const data = await response.json()
+
+    localStorage.token = data.token
+    await this.props.setUser()
+    this.props.history.push("/classes")
   }
 
   render() {
