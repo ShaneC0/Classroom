@@ -29,12 +29,9 @@ class Signin extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    authSchema
-      .validate({ email: this.state.email, password: this.state.password })
-      .catch((err) => {
-        this.setState({ errors: err.errors })
-        console.log(this.state.errors)
-      });
+    //validate body
+    //stop if validation fails
+    //display validation errors
 
     axios
       .post("http://localhost:5000/api/v1/auth/signin", {
@@ -50,6 +47,7 @@ class Signin extends React.Component {
       })
       .catch((error) => {
         this.setState({ errors: error.errors });
+        //push server errors onto the end of state errors
       });
   }
 

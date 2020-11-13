@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authRouter from "./auth/auth.router"
-import classRouter from "./class/class.router"
+import lessonRouter from "./lesson/lesson.router"
 import { authorize } from "./util/middleware"
 
 const apiRouter = Router();
@@ -14,6 +14,6 @@ apiRouter.get('/', (req, res, next) => {
 })
 
 apiRouter.use('/auth', authRouter)
-apiRouter.use('/class', authorize, classRouter)
+apiRouter.use('/lesson', authorize, lessonRouter)
 
 export default apiRouter;

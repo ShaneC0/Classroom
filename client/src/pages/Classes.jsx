@@ -13,29 +13,29 @@ class Classes extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/v1/class/all", {
+      .get("http://localhost:5000/api/v1/lesson/all", {
         headers: {
           Authorization: `Bearer ${localStorage.token}`,
         },
       })
       .then((res) => {
-        if (res.data.classes) {
-          this.setState({ classes: res.data.classes });
+        if (res.data.lessons) {
+          this.setState({ classes: res.data.lessons });
         }
       });
   }
 
   render() {
     return (
-      <section>
+      <div className="card-container">
         {this.state.classes.length > 0 ? (
-          <>
-            <Classcard class={this.state.classes[0]} />
-            <Classcard class={this.state.classes[1]} />
-            <Classcard class={this.state.classes[2]} />
-          </>
-        ) : null}
-      </section>
+          this.state.classes.map((classObj, i) => (
+            <Classcard key={i} class={classObj} />
+          ))
+        ) : (
+          <h2>No classes to display. TODO: Create new class</h2>
+        )}
+      </div>
     );
   }
 }

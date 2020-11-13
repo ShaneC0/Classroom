@@ -3,7 +3,7 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
 import User from "./User";
 
 @Entity()
-export default class Class {
+export default class Lesson {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -15,4 +15,10 @@ export default class Class {
     @Column()
     @IsInt()
     period: number;
+
+    @ManyToOne(() => User, user => user.lessons)
+    teacher: User;
+
+    @Column()
+    teacherId: number;
 }

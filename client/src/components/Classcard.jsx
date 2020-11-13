@@ -5,7 +5,7 @@ export default function Classcard(props) {
         <div className="class-card">
             <h1>{props.class.name}</h1>
             <p>Period {props.class.period}</p>
-            <p>Teacher name</p>
+            <p>Teacher ID: {props.class.teacherId}</p>
         </div>
     )
 }

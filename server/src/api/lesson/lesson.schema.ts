@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const classSchema = yup.object().shape({
+const lessonSchema = yup.object().shape({
   name: yup
     .string()
     .min(2, "Class name must be at least 2 characters")
@@ -13,4 +13,4 @@ const classSchema = yup.object().shape({
     .required("Period is required"),
 });
 
-export default classSchema;
+export default lessonSchema;

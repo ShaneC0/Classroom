@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useState} from "react";
 
 function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
   const [classMenu, setClassMenu] = useState(false);
   const [menu, setMenu] = useState(false);
+  const history = useHistory()
 
   const showSidebar = () => setSidebar(!sidebar);
   const showMenu = () => setMenu(!menu);
@@ -39,7 +40,10 @@ function Navbar(props) {
         <ul>
           {props.loggedIn ? (
             <>
-              <li onClick={() => props.logOut()}>
+              <li onClick={() => {
+                history.push('/')
+                props.logOut();
+              }}>
                 <Link to="">Log Out</Link>
               </li>
             </>
