@@ -9,7 +9,7 @@ class Signup extends React.Component {
       password: "",
       confirmPassword: "",
       currentStep: 1,
-      error: ""
+      error: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,20 +29,24 @@ class Signup extends React.Component {
 
     //handle request errors
 
-    const response = await fetch('http://localhost:5000/api/v1/auth/signup', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+    const response = await fetch("http://localhost:5000/api/v1/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password
-      })
-    })
+        password: this.state.password,
+      }),
+    });
 
-    const data = await response.json()
+    const data = await response.json();
 
-    localStorage.token = data.token
-    await this.props.setUser()
-    this.props.history.push("/classes")
+    if (!response.ok) {
+      this.setState({error: data.message})
+    } else {
+      localStorage.token = data.token;
+      await this.props.setUser();
+      this.props.history.push("/classes");
+    }
   }
 
   render() {
@@ -50,7 +54,7 @@ class Signup extends React.Component {
       <section>
         <form>
           <h2>Sign up</h2>
-          {this.state.error}
+          <h3>{this.state.error}</h3>
           {this.state.currentStep === 1 ? (
             <>
               <input

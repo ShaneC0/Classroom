@@ -11,15 +11,19 @@ class Classes extends React.Component {
   }
 
   async componentDidMount() {
-        const response = await fetch('http://localhost:5000/api/v1/lesson/all', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.token}`
-        }
-      })
+    const response = await fetch("http://localhost:5000/api/v1/lesson/all", {
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    });
 
-      const data = await response.json()
+    const data = await response.json();
 
-      this.setState({classes: data.lessons})
+    if (!response.ok) {
+      console.error(data && data.message);
+    } else {
+      this.setState({ classes: data.lessons });
+    }
   }
 
   render() {

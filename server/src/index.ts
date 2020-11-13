@@ -1,4 +1,4 @@
-import { createConnection } from "typeorm";
+import { createConnection, getRepository } from "typeorm";
 import cors from "cors";
 import morgan from "morgan";
 
@@ -6,6 +6,9 @@ import apiRouter from "./api/api.router";
 import {checkTokenSetUser} from "./api/util/middleware"
 
 import express from "express";
+import User from "./entity/User";
+import Lesson from "./entity/Lesson";
+import Enrollment from "./entity/Enrollment";
 
 const app: express.Application = express();
 

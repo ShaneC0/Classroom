@@ -5,7 +5,7 @@ class CreateClass extends React.Component {
     super(props);
     this.state = {
       name: "",
-      period: 0,
+      period: 1,
       errors: [],
     };
     this.handleChange = this.handleChange.bind(this);
@@ -21,8 +21,27 @@ class CreateClass extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
+
+    const response = await fetch("http://localhost:5000/api/v1/lesson/create", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        period: parseInt(this.state.period),
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error(data.message);
+    } else {
+      this.props.history.push("/classes");
+    }
   }
 
   render() {
@@ -49,7 +68,6 @@ class CreateClass extends React.Component {
           <div className="form-actions">
             <button onClick={(e) => this.handleSubmit(e)}>Next</button>
           </div>
-
         </form>
       </section>
     );

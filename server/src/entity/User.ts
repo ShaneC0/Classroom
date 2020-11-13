@@ -1,6 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable} from "typeorm";
 import {IsEmail, Length, MinLength} from "class-validator"
 import Lesson from "./Lesson";
+import Enrollment from "./Enrollment";
 
 @Entity()
 export default class User {
@@ -16,6 +17,6 @@ export default class User {
     @MinLength(8)
     password: string;
 
-    @OneToMany(() => Lesson, lesson => lesson.teacher)
-    teachingLessons: Lesson[]
+    @OneToMany(() => Enrollment, enrollment => enrollment.student)
+    enrollments: Enrollment[]
 }
