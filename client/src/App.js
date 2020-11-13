@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Classes from "./pages/Classes";
 import CreateClass from "./pages/CreateClass";
+import JoinClass from "./pages/JoinClass";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 
@@ -51,6 +52,7 @@ class App extends React.Component {
         <Navbar
           loggedIn={this.state.user !== null ? true : false}
           logOut={this.logOut}
+          user={this.state.user}
         />
         <Switch>
           <Route
@@ -66,6 +68,7 @@ class App extends React.Component {
             render={(props) => <Classes {...props} user={this.state.user} />}
           />
           <Route path="/createclass" component={CreateClass} />
+          <Route path="/joinclass" component={JoinClass} />
           <Route path="/" component={Landing} />
         </Switch>
       </Router>

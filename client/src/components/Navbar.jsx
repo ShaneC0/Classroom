@@ -40,12 +40,14 @@ function Navbar(props) {
         <ul>
           {props.loggedIn ? (
             <>
+            <li>{props.user.email}</li>
               <li onClick={() => {
                 history.push('/')
                 props.logOut();
               }}>
                 <Link to="">Log Out</Link>
               </li>
+
             </>
           ) : (
             <>
@@ -63,7 +65,7 @@ function Navbar(props) {
       <div className={classMenu ? "menu" : "menu-disabled"}>
         <ul>
           <li>
-            <Link to="">Join class</Link>
+            <Link to="/joinclass">Join class</Link>
           </li>
           <li>
             <Link to="/createclass">Create class</Link>
@@ -76,7 +78,6 @@ function Navbar(props) {
           <li>
             <Link to="/classes">Classes</Link>
           </li>
-          <li>Calendar</li>
         </ul>
       </div>
     </>

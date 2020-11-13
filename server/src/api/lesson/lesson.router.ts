@@ -7,7 +7,6 @@ import Lesson from "../../entity/Lesson";
 const lessonRouter = Router();
 
 lessonRouter.get("/all", async (req, res, next) => {
-  //returns all lessons where the teacher id is the same as req.user from token
   const enrollmentRepository = getRepository(Enrollment);
   const enrollments = await enrollmentRepository
     .createQueryBuilder("enrollment")
@@ -25,6 +24,8 @@ lessonRouter.post("/create", async (req, res, next) => {
   const enrollmentRepository = getRepository(Enrollment);
   //validate body
   //create class object
+
+  console.log("request body", req.body)
 
   const createdLesson = await repository.create({
     name: req.body.name,

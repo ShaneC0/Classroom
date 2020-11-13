@@ -7,6 +7,7 @@ class Classes extends React.Component {
     super(props);
     this.state = {
       classes: [],
+      loading: true,
     };
   }
 
@@ -22,19 +23,19 @@ class Classes extends React.Component {
     if (!response.ok) {
       console.error(data && data.message);
     } else {
-      this.setState({ classes: data.lessons });
+      this.setState({ classes: data.lessons, loading: false });
     }
   }
 
   render() {
     return (
       <div className="card-container">
-        {this.state.classes.length > 0 ? (
+        {this.state.loading ? (
+          <h2>LOADING</h2>
+        ) : (
           this.state.classes.map((classObj, i) => (
             <Classcard key={i} class={classObj} />
           ))
-        ) : (
-          <h2>No classes to display. TODO: Create new class</h2>
         )}
       </div>
     );

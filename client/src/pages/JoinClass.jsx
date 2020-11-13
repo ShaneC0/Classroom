@@ -1,11 +1,10 @@
 import React from "react";
 
-class CreateClass extends React.Component {
+class JoinClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      period: "",
+      joinCode: "",
       errors: [],
     };
     this.handleChange = this.handleChange.bind(this);
@@ -26,12 +25,8 @@ class CreateClass extends React.Component {
 
     //validate class before
 
-    const response = await fetch("http://localhost:5000/api/v1/lesson/create", {
+    const response = await fetch("http://localhost:5000/api/v1/lesson/join/" + this.state.joinCode, {
       method: "POST",
-      body: JSON.stringify({
-        name: this.state.name,
-        period: this.state.period,
-      }),
       headers: {
         Authorization: `Bearer ${localStorage.token}`,
         "Content-Type": "application/json",
@@ -51,22 +46,14 @@ class CreateClass extends React.Component {
     return (
       <section>
         <form>
-          <h2>Create Class</h2>
+          <h2>Join Class</h2>
 
           <input
-            value={this.state.name}
+            value={this.state.joinCode}
             onChange={this.handleChange}
             type="text"
-            name="name"
-            placeholder="Class name"
-          />
-
-          <input
-            value={this.state.period}
-            onChange={this.handleChange}
-            name="period"
-            type="text"
-            placeholder="Period"
+            name="joinCode"
+            placeholder="Class code"
           />
 
           <div className="form-actions">
@@ -78,4 +65,4 @@ class CreateClass extends React.Component {
   }
 }
 
-export default CreateClass;
+export default JoinClass;

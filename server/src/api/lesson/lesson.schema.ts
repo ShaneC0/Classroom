@@ -7,10 +7,8 @@ const lessonSchema = yup.object().shape({
     .max(50, "Class name must be less than 50 characters")
     .required("Class name is required"),
   period: yup
-    .number()
-    .positive("Period must be positive")
-    .integer("Period must be an integer")
-    .required("Period is required"),
-});
+    .string()
+    .required()
+})
 
 export default lessonSchema;

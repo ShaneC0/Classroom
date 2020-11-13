@@ -19,8 +19,7 @@ export default class Lesson {
   name: string;
 
   @Column()
-  @IsInt()
-  period: number;
+  period: string;
 
   @OneToMany(() => Enrollment, (enrollment) => enrollment.student)
   enrollments: Enrollment[];
