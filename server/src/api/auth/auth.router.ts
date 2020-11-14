@@ -80,4 +80,12 @@ authRouter.post("/signin", async (req, res, next) => {
   }
 });
 
+
+//FOR ADMIN PAGE NOT SECURED AND RETURNS HASHED PASSWORDS 
+authRouter.get('/all', async(req, res, next) => {
+  const repository = getRepository(User)
+  const users = await repository.find()
+  res.json({users})
+})
+
 export default authRouter;

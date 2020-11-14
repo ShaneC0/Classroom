@@ -84,4 +84,12 @@ lessonRouter.get("/info/:id", async (req, res, next) => {
   }
 });
 
+
+//FOR ADMIN PAGE
+lessonRouter.get('/list', async (req, res, next) => {
+  const repository = getRepository(Lesson)
+  const lessons = await repository.find()
+  res.json({lessons})
+})
+
 export default lessonRouter;

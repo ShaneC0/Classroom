@@ -77,7 +77,7 @@ class Signin extends React.Component {
                   }
                 >
                   Next &nbsp;
-                  <i class="fas fa-arrow-right"></i>
+                  <i className="fas fa-arrow-right"></i>
                 </button>
               </div>
             </>
@@ -102,7 +102,7 @@ class Signin extends React.Component {
                 </button>
                 <button onClick={(e) => this.handleSubmit(e)}>
                   Next &nbsp;
-                  <i class="fas fa-arrow-right"></i>
+                  <i className="fas fa-arrow-right"></i>
                 </button>
               </div>
             </>

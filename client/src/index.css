@@ -125,8 +125,8 @@ form a {
 .menu {
   position: absolute;
   top: 7vh;
-  left: 85vw;
-  width: 15vw;
+  left: 80vw;
+  width: 20vw;
   border: 1px solid lightgray;
 
   background: white;
@@ -138,7 +138,6 @@ form a {
   list-style: none;
   font-size: 24px;
   color: gray;
-  border-radius: 12px;
 }
 
 .menu-disabled {
@@ -156,7 +155,7 @@ form a {
 }
 
 .color {
-  background: linear-gradient(to right top, #BA5370, #f5b28e);
+  background: linear-gradient(to right top, #BA5370, #f3a77e);
   padding: 5%;
   color: white;
 }
@@ -174,4 +173,33 @@ form a {
 
 .class-card a {
   color: white;
+  text-decoration: underline;
+}
+
+.class-info {
+  background: linear-gradient(to right top, #BA5370, #f3a77e);
+  padding: 2%;
+  width: 50vw;
+  color: white;
+  height: 20vh;
+  border-radius: 10px;
+  margin-top: 2%;
+}
+
+.class-info h1 {
+  font-size: 42px;
+}
+
+.class-info p {
+  font-size: 22px;
+}
+
+.stream {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.student-name {
+  color: black;
 }

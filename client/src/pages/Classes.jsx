@@ -32,10 +32,14 @@ class Classes extends React.Component {
       <div className="card-container">
         {this.state.loading ? (
           <h2>LOADING</h2>
+        ) : this.state.classes.length > 0 ? (
+          <>
+            {this.state.classes.map((classObj, i) => (
+              <Classcard key={i} classObj={classObj} />
+            ))}
+          </>
         ) : (
-          this.state.classes.map((classObj, i) => (
-            <Classcard key={i} class={classObj} />
-          ))
+          <h1>No classes</h1>
         )}
       </div>
     );
@@ -43,3 +47,7 @@ class Classes extends React.Component {
 }
 
 export default Classes;
+
+// this.state.classes.map((classObj, i) => (
+//   <Classcard key={i} class={classObj} />
+// ))

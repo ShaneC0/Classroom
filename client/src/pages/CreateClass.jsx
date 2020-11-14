@@ -73,7 +73,7 @@ class CreateClass extends React.Component {
           <div className="form-actions">
           <Link to="/classes">Back to classes</Link>
             <button onClick={(e) => this.handleSubmit(e)}>Next &nbsp;
-                  <i class="fas fa-arrow-right"></i></button>
+                  <i className="fas fa-arrow-right"></i></button>
           </div>
         </form>
       </section>

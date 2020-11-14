@@ -47,18 +47,18 @@ function Navbar(props) {
                   props.logOut();
                 }}
               >
-                <i class="fas fa-sign-out-alt"></i> &nbsp;
+                <i className="fas fa-sign-out-alt"></i> &nbsp;
                 <Link to="">Log Out</Link>
               </li>
             </>
           ) : (
             <>
               <li>
-                <i class="fas fa-user-circle"></i> &nbsp;
+                <i className="fas fa-user-circle"></i> &nbsp;
                 <Link to="/signin">Sign in</Link>
               </li>
               <li>
-                <i class="fas fa-plus"></i> &nbsp;
+                <i className="fas fa-plus"></i> &nbsp;
                 <Link to="/signup">Create account</Link>
               </li>
             </>
@@ -69,11 +69,11 @@ function Navbar(props) {
       <div className={classMenu ? "menu" : "menu-disabled"}>
         <ul>
           <li>
-          <i class="fas fa-sign-in-alt"></i> &nbsp;
+          <i className="fas fa-sign-in-alt"></i> &nbsp;
             <Link to="/joinclass">Join class</Link>
           </li>
           <li>
-          <i class="fas fa-plus"></i> &nbsp;
+          <i className="fas fa-plus"></i> &nbsp;
             <Link to="/createclass">Create class</Link>
           </li>
         </ul>
