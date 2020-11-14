@@ -19,13 +19,26 @@ lessonRouter.get("/all", async (req, res, next) => {
   res.json({ lessons });
 });
 
+lessonRouter.get("/students/:id", async (req, res, next) => {
+  const enrollmentRepository = getRepository(Enrollment);
+  const enrollments = await enrollmentRepository
+    .createQueryBuilder("enrollment")
+    .where("enrollment.lessonId = :id", { id: req.params.id })
+    .leftJoinAndSelect("enrollment.student", "student")
+    .getMany();
+
+  const students = enrollments.map((enrollment) => enrollment.student);
+
+  res.json({ students });
+});
+
 lessonRouter.post("/create", async (req, res, next) => {
   const repository = getRepository(Lesson);
   const enrollmentRepository = getRepository(Enrollment);
   //validate body
   //create class object
 
-  console.log("request body", req.body)
+  console.log("request body", req.body);
 
   const createdLesson = await repository.create({
     name: req.body.name,
@@ -50,15 +63,25 @@ lessonRouter.post("/create", async (req, res, next) => {
 lessonRouter.post("/join/:id", async (req, res, next) => {
   //with user id from token and class id from params
   //make enrollment and return it
-  const repository = getRepository(Enrollment)
+  const repository = getRepository(Enrollment);
   const createdEnrollment = await repository.create({
     studentId: req.user.id,
-    lessonId: parseInt(req.params.id)
-  })
+    lessonId: parseInt(req.params.id),
+  });
 
-  await repository.save(createdEnrollment)
+  await repository.save(createdEnrollment);
 
-  res.json({enrollment: createdEnrollment})
+  res.json({ enrollment: createdEnrollment });
+});
+
+lessonRouter.get("/info/:id", async (req, res, next) => {
+  const repository = getRepository(Lesson);
+  const lesson = await repository.findOne(req.params.id);
+  if (!lesson) {
+    return next();
+  } else {
+    return res.json({ lesson });
+  }
 });
 
 export default lessonRouter;

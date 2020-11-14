@@ -41,7 +41,7 @@ class Signup extends React.Component {
     const data = await response.json();
 
     if (!response.ok) {
-      this.setState({error: data.message})
+      this.setState({ error: data.message });
     } else {
       localStorage.token = data.token;
       await this.props.setUser();
@@ -72,7 +72,8 @@ class Signup extends React.Component {
                     this.setState({ currentStep: this.state.currentStep + 1 })
                   }
                 >
-                  Next
+                  Next &nbsp;
+                  <i class="fas fa-arrow-right"></i>
                 </button>
               </div>
             </>
@@ -103,7 +104,10 @@ class Signup extends React.Component {
                 >
                   Back
                 </button>
-                <button onClick={(e) => this.handleSubmit(e)}>Next</button>
+                <button onClick={(e) => this.handleSubmit(e)}>
+                  Next &nbsp;
+                  <i class="fas fa-arrow-right"></i>
+                </button>
               </div>
             </>
           ) : null}

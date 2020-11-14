@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 class CreateClass extends React.Component {
   constructor(props) {
@@ -70,7 +71,9 @@ class CreateClass extends React.Component {
           />
 
           <div className="form-actions">
-            <button onClick={(e) => this.handleSubmit(e)}>Next</button>
+          <Link to="/classes">Back to classes</Link>
+            <button onClick={(e) => this.handleSubmit(e)}>Next &nbsp;
+                  <i class="fas fa-arrow-right"></i></button>
           </div>
         </form>
       </section>

@@ -1,11 +1,11 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState} from "react";
+import { useState } from "react";
 
 function Navbar(props) {
   const [sidebar, setSidebar] = useState(false);
   const [classMenu, setClassMenu] = useState(false);
   const [menu, setMenu] = useState(false);
-  const history = useHistory()
+  const history = useHistory();
 
   const showSidebar = () => setSidebar(!sidebar);
   const showMenu = () => setMenu(!menu);
@@ -40,21 +40,25 @@ function Navbar(props) {
         <ul>
           {props.loggedIn ? (
             <>
-            <li>{props.user.email}</li>
-              <li onClick={() => {
-                history.push('/')
-                props.logOut();
-              }}>
+              <li>{props.user.email}</li>
+              <li
+                onClick={() => {
+                  history.push("/");
+                  props.logOut();
+                }}
+              >
+                <i class="fas fa-sign-out-alt"></i> &nbsp;
                 <Link to="">Log Out</Link>
               </li>
-
             </>
           ) : (
             <>
               <li>
+                <i class="fas fa-user-circle"></i> &nbsp;
                 <Link to="/signin">Sign in</Link>
               </li>
               <li>
+                <i class="fas fa-plus"></i> &nbsp;
                 <Link to="/signup">Create account</Link>
               </li>
             </>
@@ -65,9 +69,11 @@ function Navbar(props) {
       <div className={classMenu ? "menu" : "menu-disabled"}>
         <ul>
           <li>
+          <i class="fas fa-sign-in-alt"></i> &nbsp;
             <Link to="/joinclass">Join class</Link>
           </li>
           <li>
+          <i class="fas fa-plus"></i> &nbsp;
             <Link to="/createclass">Create class</Link>
           </li>
         </ul>
