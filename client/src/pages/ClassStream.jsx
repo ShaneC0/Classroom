@@ -1,5 +1,16 @@
+import React from "react";
 
+class ClassStream extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      class: {},
+    };
+  }
 
-export default function ClassStream() {
-    return <h1>Class stream</h1>
+  render() {
+    return <h1>Class stream for class id {this.props.match.params.id}</h1>;
+  }
 }
+
+export default ClassStream;

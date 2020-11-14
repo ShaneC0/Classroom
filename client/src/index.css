@@ -45,8 +45,6 @@ nav a {
   color: black;
 }
 
-
-
 section {
   height: 93vh;
   display: flex;
@@ -88,7 +86,7 @@ form button {
 }
 
 form a {
-  color: rgb(1, 119, 255)
+  color: rgb(1, 119, 255);
 }
 
 .form-actions {
@@ -167,4 +165,8 @@ form a {
   flex-direction: column;
   align-items: left;
   border-radius: 6px;
+}
+
+.class-card a {
+  color: black;
 }
