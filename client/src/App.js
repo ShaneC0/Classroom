@@ -6,6 +6,7 @@ import Signin from "./pages/Signin";
 import Classes from "./pages/Classes";
 import CreateClass from "./pages/CreateClass";
 import JoinClass from "./pages/JoinClass";
+import ClassStream from "./pages/ClassStream"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 
@@ -69,6 +70,7 @@ class App extends React.Component {
           />
           <Route path="/createclass" component={CreateClass} />
           <Route path="/joinclass" component={JoinClass} />
+          <Route path="/stream" component={ClassStream} />"
           <Route path="/" component={Landing} />
         </Switch>
       </Router>

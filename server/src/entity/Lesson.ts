@@ -7,6 +7,7 @@ import {
   ManyToMany,
   OneToMany,
 } from "typeorm";
+import Assignment from "./Assignment";
 import Enrollment from "./Enrollment";
 
 @Entity()
@@ -23,4 +24,7 @@ export default class Lesson {
 
   @OneToMany(() => Enrollment, (enrollment) => enrollment.student)
   enrollments: Enrollment[];
+
+  @OneToMany(() => Assignment, assignment => assignment.lesson)
+  assignments: Assignment[]
 }
