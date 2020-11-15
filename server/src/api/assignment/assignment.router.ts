@@ -2,8 +2,6 @@ import { Router } from "express";
 import { getRepository } from "typeorm";
 import Assignment from "../../entity/Assignment";
 
-import Lesson from "../../entity/Lesson";
-
 const assignmentRouter = Router();
 
 assignmentRouter.get("/all", async (req, res, next) => {
@@ -22,7 +20,7 @@ assignmentRouter.get("/class/:id", async (req, res, next) => {
     .where("assignment.lessonId = :id", { id: req.params.id })
     .getMany();
 
-    res.json({assignments})
+  res.json({ assignments });
 });
 
 assignmentRouter.post("/create", async (req, res, next) => {
@@ -31,7 +29,7 @@ assignmentRouter.post("/create", async (req, res, next) => {
 
   const createdAssignment = await repository.create({
     name: req.body.name,
-    pointValue: req.body.pointValue,
+    userId: req.user.id,
     lessonId: req.body.lessonId,
   });
 

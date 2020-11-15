@@ -52,7 +52,7 @@ section {
   align-items: center;
 }
 
-form {
+section form {
   border: 1px solid rgb(197, 197, 197);
   padding: 5%;
   display: flex;
@@ -62,12 +62,12 @@ form {
   width: 25vw;
 }
 
-form h2 {
+section form h2 {
   font-weight: 500;
   font-size: 28px;
 }
 
-form input {
+section form input {
   padding: 6% 4% 6% 4%;
   margin: 5vh 0 5vh 0;
   font-size: 16px;
@@ -76,7 +76,7 @@ form input {
   border: 1px solid rgb(197, 197, 197);
 }
 
-form button {
+section form button {
   background: rgb(1, 119, 255);
   padding: 5%;
   width: 30%;
@@ -85,7 +85,7 @@ form button {
   font-size: 16px;
 }
 
-form a {
+section form a {
   color: rgb(1, 119, 255);
 }
 
@@ -200,6 +200,36 @@ form a {
   align-items: center;
 }
 
-.student-name {
-  color: black;
+.stream form {
+  padding: 12px;
+  border: 2px solid lightgray;
+  display: flex;
+  width: 50vw;
+  border-radius: 5px;
+}
+
+.stream form input {
+  border-radius: 5px;
+  width: 90%;
+  border: 1px solid rgb(197, 197, 197);
+  padding: 8px;
+  font-size: 16px;
+}
+
+.stream form button {
+  background: rgb(1, 119, 255);
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  margin: 5px;
+  padding: 10px;
+  height: 5vh;
+  width: 10%;
+}
+
+.assignment-card {
+  border: 2px solid lightgray;
+  margin: 5px;
+  padding: 20px;
+  width: 50vw;
 }

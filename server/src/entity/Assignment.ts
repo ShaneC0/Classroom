@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from "typeorm";
 import Lesson from "./Lesson";
+import User from "./User";
 
 @Entity()
 export default class Assignment {
@@ -18,7 +19,10 @@ export default class Assignment {
   name: string;
 
   @Column()
-  pointValue: string;
+  userId: number;
+
+  @ManyToOne(() => User, user => user.assignments)
+  user: User
 
   @Column()
   lessonId: number;

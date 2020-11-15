@@ -2,6 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable
 import {IsEmail, Length, MinLength} from "class-validator"
 import Lesson from "./Lesson";
 import Enrollment from "./Enrollment";
+import Assignment from "./Assignment";
 
 @Entity()
 export default class User {
@@ -16,6 +17,9 @@ export default class User {
     @Column()
     @MinLength(8)
     password: string;
+
+    @OneToMany(() => Assignment, assignment => assignment.user)
+    assignments: Assignment[]
 
     @OneToMany(() => Enrollment, enrollment => enrollment.student)
     enrollments: Enrollment[]

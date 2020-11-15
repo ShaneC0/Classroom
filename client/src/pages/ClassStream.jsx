@@ -1,4 +1,5 @@
 import React from "react";
+import AssignmentCard from "../components/AssignmentCard";
 
 class ClassStream extends React.Component {
   constructor(props) {
@@ -6,8 +7,11 @@ class ClassStream extends React.Component {
     this.state = {
       class: {},
       students: [],
-      assignments: []
+      assignments: [],
+      currentPost: "",
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   async fetchStudents() {
@@ -73,6 +77,44 @@ class ClassStream extends React.Component {
     await this.fetchAssignments();
   }
 
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+    const response = await fetch(
+      "http://localhost:5000/api/v1/assignment/create",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: this.state.currentPost,
+          lessonId: this.state.class.id,
+        }),
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error(data.message);
+    } else {
+      this.setState((state, _) => ({
+        assignments: [data.assignment, ...state.assignments],
+        currentPost: "",
+      }));
+    }
+  }
+
   render() {
     return (
       <div className="stream">
@@ -83,21 +125,20 @@ class ClassStream extends React.Component {
               <p>Period: {this.state.class.period}</p>
               <p>Join Code: {this.state.class.id}</p>
             </div>
-            {this.state.students.length > 0 ? (
-              <>
-                <h1>Students: </h1>
-                {this.state.students.map((student, i) => (
-                  <p key={i}>{student.email}</p>
-                ))}
-              </>
-            ) : (
-              <h1>No students SHOULD BE IMPOSSIBLE</h1>
-            )}
+            <form>
+              <input
+                value={this.state.currentPost}
+                type="text"
+                placeholder="Say something to the class"
+                name="currentPost"
+                onChange={this.handleChange}
+              />
+              <button onClick={(e) => this.handleSubmit(e)}>Post</button>
+            </form>
             {this.state.assignments.length > 0 ? (
               <>
-                <h1>Assignments: </h1>
                 {this.state.assignments.map((assignment, i) => (
-                  <p key={i}>Assignment: {assignment.name} Points: {assignment.pointValue}</p>
+                  <AssignmentCard key={i} assignment={assignment} />
                 ))}
               </>
             ) : (
@@ -105,7 +146,7 @@ class ClassStream extends React.Component {
             )}
           </>
         ) : (
-          <h1>Loading</h1>
+          <h1>Loading...</h1>
         )}
       </div>
     );
