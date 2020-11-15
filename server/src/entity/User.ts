@@ -29,4 +29,7 @@ export default class User {
 
     @UpdateDateColumn()
     updateDate: Date
+
+    @Column({nullable: true})
+    avatarUrl: string;
 }

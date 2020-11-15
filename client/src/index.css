@@ -5,8 +5,7 @@
 }
 
 body {
-  /* add roboto */
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif
 }
 
 a {
@@ -40,10 +39,18 @@ nav i {
 
 .nav-item {
   margin-right: 2vw;
+  color: gray;
+  font-size: 24px;
 }
 
 nav a {
   color: black;
+}
+
+nav img {
+  border-radius: 24px;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 section {
@@ -230,6 +237,27 @@ section form a {
   padding: 20px;
   width: 50vw;
   border-radius: 5px;
+  display: flex;
+}
+
+.assignment-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.assignment-card img {
+  width: 3vw;
+  height: 6vh;
+  border-radius: 32px;
+  margin-right: 1vw;
+}
+
+.no-image {
+  width: 3vw;
+  height: 6vh;
+  border-radius: 32px;
+  margin-right: 1vw;
+  background: gray;
 }
 
 .error-group {

@@ -30,7 +30,15 @@ function Navbar(props) {
             </button>
 
             <button onClick={showMenu}>
-              <i className="fas fa-circle nav-item"></i>
+              {props.user ? (
+                props.user.avatarUrl ? (
+                  <img src={props.user.avatarUrl}></img>
+                ) : (
+                  <i className="fas fa-circle nav-item"></i>
+                )
+              ) : (
+                <i className="fas fa-circle nav-item"></i>
+              )}
             </button>
           </div>
         </nav>
@@ -69,11 +77,11 @@ function Navbar(props) {
       <div className={classMenu ? "menu" : "menu-disabled"}>
         <ul>
           <li>
-          <i className="fas fa-sign-in-alt"></i> &nbsp;
+            <i className="fas fa-sign-in-alt"></i> &nbsp;
             <Link to="/joinclass">Join class</Link>
           </li>
           <li>
-          <i className="fas fa-plus"></i> &nbsp;
+            <i className="fas fa-plus"></i> &nbsp;
             <Link to="/createclass">Create class</Link>
           </li>
         </ul>
@@ -83,6 +91,9 @@ function Navbar(props) {
         <ul>
           <li>
             <Link to="/classes">Classes</Link>
+          </li>
+          <li>
+            <Link to="/settings">Settings</Link>
           </li>
         </ul>
       </div>
