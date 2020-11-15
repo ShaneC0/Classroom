@@ -276,3 +276,42 @@ section form a {
   padding: 8px;
   margin: 0 0 5vh 0;
 }
+
+#landing {
+  height: 93vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, rgb(200, 200, 200), rgb(230, 230, 230));
+}
+
+#landing .image {
+  background-image: url('./img/landing-classroom.png');
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+  background-size: cover;
+  width: 70%;
+  height: 70vh;
+  border-radius: 10px;
+  text-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+  box-shadow: 8px 8px 10px rgba(0,0,0,0.4)
+}
+
+.image h3 {
+  color: white;
+  position: absolute;
+  font-size: 80px;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%)
+}
+
+.image h1 {
+  position: absolute;
+  font-size: 96px;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  font-weight: 200;
+}
