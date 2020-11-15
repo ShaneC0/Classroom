@@ -6,6 +6,7 @@ import {
   ManyToOne,
   ManyToMany,
   OneToMany,
+  CreateDateColumn,
 } from "typeorm";
 import Lesson from "./Lesson";
 import User from "./User";
@@ -21,12 +22,18 @@ export default class Assignment {
   @Column()
   userId: number;
 
-  @ManyToOne(() => User, user => user.assignments)
-  user: User
+  @ManyToOne(() => User, (user) => user.assignments)
+  user: User;
 
   @Column()
   lessonId: number;
 
-  @ManyToOne(() => Lesson, lesson => lesson.assignments)
-  lesson: Lesson
+  @ManyToOne(() => Lesson, (lesson) => lesson.assignments)
+  lesson: Lesson;
+
+  @CreateDateColumn()
+  createDate: Date;
+
+  @CreateDateColumn()
+  updateDate: Date;
 }

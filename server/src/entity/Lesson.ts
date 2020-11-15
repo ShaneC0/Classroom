@@ -6,6 +6,8 @@ import {
   ManyToOne,
   ManyToMany,
   OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import Assignment from "./Assignment";
 import Enrollment from "./Enrollment";
@@ -25,6 +27,12 @@ export default class Lesson {
   @OneToMany(() => Enrollment, (enrollment) => enrollment.student)
   enrollments: Enrollment[];
 
-  @OneToMany(() => Assignment, assignment => assignment.lesson)
-  assignments: Assignment[]
+  @OneToMany(() => Assignment, (assignment) => assignment.lesson)
+  assignments: Assignment[];
+
+  @CreateDateColumn()
+  createDate: Date;
+
+  @UpdateDateColumn()
+  updateDate: Date;
 }

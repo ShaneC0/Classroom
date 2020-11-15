@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn} from "typeorm";
 import {IsEmail, Length, MinLength} from "class-validator"
 import Lesson from "./Lesson";
 import Enrollment from "./Enrollment";
@@ -23,4 +23,10 @@ export default class User {
 
     @OneToMany(() => Enrollment, enrollment => enrollment.student)
     enrollments: Enrollment[]
+
+    @CreateDateColumn()
+    createDate: Date
+
+    @UpdateDateColumn()
+    updateDate: Date
 }
