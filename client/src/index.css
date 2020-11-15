@@ -185,7 +185,7 @@ section form a {
   padding: 2%;
   width: 50vw;
   color: white;
-  height: 20vh;
+  height: 25vh;
   border-radius: 10px;
   margin-top: 2%;
 }
@@ -246,15 +246,23 @@ section form a {
 }
 
 .assignment-card img {
-  width: 3vw;
-  height: 6vh;
+  width: 2vw;
+  height: 4vh;
   border-radius: 32px;
   margin-right: 1vw;
 }
 
+.assignment-info p {
+  margin-top: 1vh;
+}
+
+.assignment-info span {
+  font-size: 12px;
+}
+
 .no-image {
-  width: 3vw;
-  height: 6vh;
+  width: 2vw;
+  height: 4vh;
   border-radius: 32px;
   margin-right: 1vw;
   background: gray;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import authSchema from "../schema/auth.schema"
+import authSchema from "../schema/auth.schema";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class Signup extends React.Component {
       const data = await response.json();
 
       if (!response.ok) {
-        console.error(data)
+        this.setState({ errors: [data.message] });
       } else {
         localStorage.token = data.token;
         await this.props.setUser();
@@ -58,18 +58,19 @@ class Signup extends React.Component {
       this.setState({ errors: error.errors });
     }
   }
-  
 
   render() {
     return (
       <section>
         <form>
           <h2>Sign up</h2>
-
-          {this.state.errors.length > 0
-            ? <div className="error-group">{this.state.errors.map((error) => <p>{error}</p>)}</div>
-            : null}
-
+          {this.state.errors.length > 0 ? (
+            <div className="error-group">
+              {this.state.errors.map((error, i) => (
+                <p key={i}>{error}</p>
+              ))}
+            </div>
+          ) : null}
 
           {this.state.currentStep === 1 ? (
             <>
@@ -94,7 +95,6 @@ class Signup extends React.Component {
               </div>
             </>
           ) : null}
-          
 
           {this.state.currentStep === 2 ? (
             <>

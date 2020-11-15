@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import authSchema from "../schema/auth.schema";
 
 class Signin extends React.Component {
   constructor(props) {
@@ -28,32 +27,23 @@ class Signin extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
 
-    try {
-      await authSchema.validate(
-        { email: this.state.email, password: this.state.password },
-        { abortEarly: false }
-      );
+    const response = await fetch("http://localhost:5000/api/v1/auth/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    });
 
-      const response = await fetch("http://localhost:5000/api/v1/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }),
-      });
+    const data = await response.json();
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error(data)
-      } else {
-        localStorage.token = data.token;
-        await this.props.setUser();
-        this.props.history.push("/classes");
-      }
-    } catch (error) {
-      this.setState({ errors: error.errors });
+    if (!response.ok) {
+      this.setState({ errors: [data.message] });
+    } else {
+      localStorage.token = data.token;
+      await this.props.setUser();
+      this.props.history.push("/classes");
     }
   }
 
@@ -62,9 +52,13 @@ class Signin extends React.Component {
       <section>
         <form>
           <h2>Sign in</h2>
-          {this.state.errors.length > 0
-            ? <div className="error-group">{this.state.errors.map((error) => <p>{error}</p>)}</div>
-            : null}
+          {this.state.errors.length > 0 ? (
+            <div className="error-group">
+              {this.state.errors.map((error, i) => (
+                <p key={i}>{error}</p>
+              ))}
+            </div>
+          ) : null}
           {this.state.currentStep === 1 ? (
             <>
               <input

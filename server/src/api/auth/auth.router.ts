@@ -12,8 +12,6 @@ const authRouter = Router();
 authRouter.post("/signup", async (req, res, next) => {
   const repository = getRepository(User);
 
-  await authSchema.validate({ ...req.body }).catch((err) => next(err));
-
   const existingUser = await repository.findOne({ email: req.body.email });
 
   if (existingUser) {
@@ -32,7 +30,7 @@ authRouter.post("/signup", async (req, res, next) => {
   const user = await repository.findOne({ email: req.body.email });
 
   jwt.sign(
-    { email: user.email, id: user.id, avatarUrl: existingUser.avatarUrl },
+    { email: user.email, id: user.id, avatarUrl: null },
     process.env.TOKEN_SECRET,
     {
       expiresIn: 60 * 60 * 24 * 10,
@@ -50,8 +48,6 @@ authRouter.post("/signup", async (req, res, next) => {
 
 authRouter.post("/signin", async (req, res, next) => {
   const repository = getRepository(User);
-
-  await authSchema.validate({ ...req.body }).catch((err) => next(err));
 
   const existingUser = await repository.findOne({ email: req.body.email });
 

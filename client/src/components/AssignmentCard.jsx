@@ -12,9 +12,25 @@ export default function AssignmentCard(props) {
       </div>
       <div className="assignment-info">
         <h3>{props.assignment.user.email}</h3>
-        <span>{props.assignment.name}</span>
-        <span>{props.assignment.updateDate}</span>
+        <span>{getDateFormat(props.assignment.updateDate)}</span>
+        <p>{props.assignment.name}</p>
       </div>
     </div>
   );
 }
+
+const getDateFormat = (iso) => {
+  let date = new Date(iso);
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let dt = date.getDate();
+
+  if (dt < 10) {
+    dt = "0" + dt;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+
+  return `${month}/${dt}/${year}`
+};
