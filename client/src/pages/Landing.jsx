@@ -1,9 +1,10 @@
 import React from "react";
+import Particles from "react-particles-js";
 
 export default function Landing() {
   return (
-    <section className="landing">
-      <h1>Welcome to classroom.</h1>
-    </section>
+    <div id="landing">
+      Landing page
+    </div>
   );
 }

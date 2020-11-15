@@ -18,6 +18,8 @@ assignmentRouter.get("/class/:id", async (req, res, next) => {
   const assignments = await repository
     .createQueryBuilder("assignment")
     .where("assignment.lessonId = :id", { id: req.params.id })
+    .leftJoinAndSelect("assignment.user", "user")
+    .leftJoinAndSelect("assignment.lesson", "lesson")
     .getMany();
 
   res.json({ assignments });
@@ -35,7 +37,7 @@ assignmentRouter.post("/create", async (req, res, next) => {
 
   await repository.save(createdAssignment);
 
-  const insertedAssignment = await repository.findOne({ name: req.body.name });
+  const insertedAssignment = await repository.findOne({ name: req.body.name }, {relations: ["lesson", "user"]});
 
   res.json({ assignment: insertedAssignment });
 });

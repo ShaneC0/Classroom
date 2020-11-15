@@ -67,7 +67,7 @@ class ClassStream extends React.Component {
     if (!response.ok) {
       console.error(data.message);
     } else {
-      this.setState({ assignments: data.assignments });
+      this.setState({ assignments: data.assignments.reverse() });
     }
   }
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import authSchema from "../schema/auth.schema"
+
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,7 @@ class Signup extends React.Component {
       password: "",
       confirmPassword: "",
       currentStep: 1,
-      error: "",
+      errors: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,40 +23,54 @@ class Signup extends React.Component {
     const name = target.name;
     this.setState({
       [name]: value,
+      errors: [],
     });
   }
 
-  async handleSubmit(e) {
-    e.preventDefault();
+  async handleSubmit(event) {
+    event.preventDefault();
 
-    //handle request errors
+    try {
+      await authSchema.validate(
+        { email: this.state.email, password: this.state.password },
+        { abortEarly: false }
+      );
 
-    const response = await fetch("http://localhost:5000/api/v1/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-      }),
-    });
+      const response = await fetch("http://localhost:5000/api/v1/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      this.setState({ error: data.message });
-    } else {
-      localStorage.token = data.token;
-      await this.props.setUser();
-      this.props.history.push("/classes");
+      if (!response.ok) {
+        console.error(data)
+      } else {
+        localStorage.token = data.token;
+        await this.props.setUser();
+        this.props.history.push("/classes");
+      }
+    } catch (error) {
+      this.setState({ errors: error.errors });
     }
   }
+  
 
   render() {
     return (
       <section>
         <form>
           <h2>Sign up</h2>
-          <h3>{this.state.error}</h3>
+
+          {this.state.errors.length > 0
+            ? <div className="error-group">{this.state.errors.map((error) => <p>{error}</p>)}</div>
+            : null}
+
+
           {this.state.currentStep === 1 ? (
             <>
               <input
@@ -78,6 +94,7 @@ class Signup extends React.Component {
               </div>
             </>
           ) : null}
+          
 
           {this.state.currentStep === 2 ? (
             <>

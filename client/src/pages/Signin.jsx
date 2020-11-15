@@ -9,7 +9,7 @@ class Signin extends React.Component {
       email: "",
       password: "",
       currentStep: 1,
-      error: "",
+      errors: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,35 +21,39 @@ class Signin extends React.Component {
     const name = target.name;
     this.setState({
       [name]: value,
+      errors: [],
     });
   }
 
   async handleSubmit(event) {
     event.preventDefault();
 
-    //validate body
-    //stop if validation fails
-    //display validation errors
+    try {
+      await authSchema.validate(
+        { email: this.state.email, password: this.state.password },
+        { abortEarly: false }
+      );
 
-    //handle errors on requests
+      const response = await fetch("http://localhost:5000/api/v1/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      });
 
-    const response = await fetch("http://localhost:5000/api/v1/auth/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-      }),
-    });
+      const data = await response.json();
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      this.setState({ error: data.message });
-    } else {
-      localStorage.token = data.token;
-      await this.props.setUser();
-      this.props.history.push("/classes");
+      if (!response.ok) {
+        console.error(data)
+      } else {
+        localStorage.token = data.token;
+        await this.props.setUser();
+        this.props.history.push("/classes");
+      }
+    } catch (error) {
+      this.setState({ errors: error.errors });
     }
   }
 
@@ -58,7 +62,9 @@ class Signin extends React.Component {
       <section>
         <form>
           <h2>Sign in</h2>
-          <h3>{this.state.error}</h3>
+          {this.state.errors.length > 0
+            ? <div className="error-group">{this.state.errors.map((error) => <p>{error}</p>)}</div>
+            : null}
           {this.state.currentStep === 1 ? (
             <>
               <input

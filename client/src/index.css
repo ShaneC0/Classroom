@@ -65,11 +65,12 @@ section form {
 section form h2 {
   font-weight: 500;
   font-size: 28px;
+  margin: 5vh 0 5vh 0;
 }
 
 section form input {
   padding: 6% 4% 6% 4%;
-  margin: 5vh 0 5vh 0;
+  margin: 0 0 5vh 0;
   font-size: 16px;
   width: 100%;
   border-radius: 4%;
@@ -142,11 +143,6 @@ section form a {
 
 .menu-disabled {
   display: none;
-}
-
-.landing h1 {
-  font-size: 96px;
-  font-weight: 300;
 }
 
 .card-container {
@@ -232,4 +228,14 @@ section form a {
   margin: 5px;
   padding: 20px;
   width: 50vw;
+  border-radius: 5px;
+}
+
+.error-group {
+  background: #ffbed1;
+  color: #80384c;
+  border: 2px solid #BA5370;
+  border-radius: 3px;
+  padding: 8px;
+  margin: 0 0 5vh 0;
 }
