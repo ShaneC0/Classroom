@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+
 
 export default function AssignmentCard(props) {
   return (
     <div className="assignment-card">
       <div>
         {props.assignment.user.avatarUrl ? (
-          <img src={props.assignment.user.avatarUrl}></img>
+          <img src={props.assignment.user.avatarUrl} alt="avatar"></img>
         ) : (
           <div className="no-image"></div>
         )}

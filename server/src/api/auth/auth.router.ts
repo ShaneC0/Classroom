@@ -87,4 +87,13 @@ authRouter.get("/all", async (req, res, next) => {
   res.json({ users });
 });
 
+//FOR SETTINGS TO CHANGE AVATAR URL....... CHANGE FOR FULL UPDATE LATER
+authRouter.post('/updateurl', async(req, res, next) => {
+  const repository = getRepository(User)
+  await repository.update({id: req.user.id}, {avatarUrl: req.body.avatarUrl})
+  const updatedUser = await repository.findOne(req.user.id)
+  res.json({updatedUser})
+})
+
+
 export default authRouter;

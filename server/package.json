@@ -23,6 +23,7 @@
       "yup": "^0.29.3"
    },
    "scripts": {
-      "start": "ts-node -r dotenv-safe/config src/index.ts"
+      "start": "ts-node -r dotenv-safe/config src/index.ts",
+      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
    }
 }

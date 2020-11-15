@@ -8,6 +8,7 @@ import CreateClass from "./pages/CreateClass";
 import JoinClass from "./pages/JoinClass";
 import ClassStream from "./pages/ClassStream";
 import Admin from "./pages/Admin";
+import Settings from "./pages/Settings"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 
@@ -73,6 +74,7 @@ class App extends React.Component {
           <Route path="/joinclass" component={JoinClass} />
           <Route path="/stream/:id" component={ClassStream} />"
           <Route path="/admin" component={Admin} />
+          <Route path="/settings" component={Settings} />
           <Route path="/" component={Landing} />
         </Switch>
       </Router>
