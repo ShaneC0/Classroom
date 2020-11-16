@@ -11,7 +11,8 @@ export default function AssignmentCard(props) {
         )}
       </div>
       <div className="assignment-info">
-        <h3>{props.assignment.user.email}</h3>
+        <h3>{props.assignment.user.name}</h3>
+        <span>{props.assignment.user.email}</span>
         <span>{getDateFormat(props.assignment.updateDate)}</span>
         <p>{props.assignment.name}</p>
       </div>

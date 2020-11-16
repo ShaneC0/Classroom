@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif
+  font-family: "Roboto", sans-serif;
 }
 
 a {
@@ -137,7 +137,7 @@ section form a {
   left: 80vw;
   width: 20vw;
   border: 1px solid lightgray;
-
+  z-index: 5;
   background: white;
 }
 
@@ -159,7 +159,7 @@ section form a {
 }
 
 .color {
-  background: linear-gradient(to right top, #BA5370, #f3a77e);
+  background: linear-gradient(to right top, #ba5370, #f3a77e);
   padding: 5%;
   color: white;
 }
@@ -181,7 +181,7 @@ section form a {
 }
 
 .class-info {
-  background: linear-gradient(to right top, #BA5370, #f3a77e);
+  background: linear-gradient(to right top, #ba5370, #f3a77e);
   padding: 2%;
   width: 50vw;
   color: white;
@@ -271,7 +271,7 @@ section form a {
 .error-group {
   background: #ffbed1;
   color: #80384c;
-  border: 2px solid #BA5370;
+  border: 2px solid #ba5370;
   border-radius: 3px;
   padding: 8px;
   margin: 0 0 5vh 0;
@@ -287,15 +287,15 @@ section form a {
 }
 
 #landing .image {
-  background-image: url('./img/landing-classroom.png');
+  background-image: url("./img/landing-classroom.png");
   background-repeat: no-repeat, repeat;
   background-position: center;
   background-size: cover;
   width: 70%;
   height: 70vh;
   border-radius: 10px;
-  text-shadow: 4px 4px 10px rgba(0,0,0,0.4);
-  box-shadow: 8px 8px 10px rgba(0,0,0,0.4)
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.4);
 }
 
 .image h3 {
@@ -304,7 +304,7 @@ section form a {
   font-size: 80px;
   top: 40%;
   left: 50%;
-  transform: translate(-50%, -40%)
+  transform: translate(-50%, -40%);
 }
 
 .image h1 {
@@ -314,4 +314,15 @@ section form a {
   left: 50%;
   transform: translate(-50%, -70%);
   font-weight: 200;
+}
+
+.student-list {
+  position: absolute;
+  margin: 2% 0 0 2%;
+  padding: 2%;
+  top: 7vh;
+  left: 75vw;
+  width: 15vw;
+  border: 2px solid lightgray;
+  border-radius: 8px;
 }

@@ -30,7 +30,7 @@ authRouter.post("/signup", async (req, res, next) => {
   const user = await repository.findOne({ email: req.body.email });
 
   jwt.sign(
-    { email: user.email, id: user.id, avatarUrl: null },
+    { email: user.email, id: user.id, avatarUrl: null, name: user.name },
     process.env.TOKEN_SECRET,
     {
       expiresIn: 60 * 60 * 24 * 10,
@@ -61,6 +61,7 @@ authRouter.post("/signin", async (req, res, next) => {
         email: existingUser.email,
         id: existingUser.id,
         avatarUrl: existingUser.avatarUrl,
+        name: existingUser.name
       },
       process.env.TOKEN_SECRET,
       {

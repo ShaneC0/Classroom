@@ -10,6 +10,9 @@ export default class User {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column()
+    name: string;
+
     @Column({unique: true})
     @IsEmail()
     email: string;

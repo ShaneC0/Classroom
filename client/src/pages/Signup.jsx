@@ -10,6 +10,7 @@ class Signup extends React.Component {
       email: "",
       password: "",
       confirmPassword: "",
+      name: "",
       currentStep: 1,
       errors: [],
     };
@@ -42,6 +43,7 @@ class Signup extends React.Component {
         body: JSON.stringify({
           email: this.state.email,
           password: this.state.password,
+          name: this.state.name,
         }),
       });
 
@@ -74,6 +76,14 @@ class Signup extends React.Component {
 
           {this.state.currentStep === 1 ? (
             <>
+              <input
+                value={this.state.name}
+                onChange={this.handleChange}
+                type="text"
+                name="name"
+                placeholder="Full name"
+              />
+
               <input
                 value={this.state.email}
                 onChange={this.handleChange}

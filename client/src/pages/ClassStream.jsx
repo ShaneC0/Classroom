@@ -117,38 +117,53 @@ class ClassStream extends React.Component {
 
   render() {
     return (
-      <div className="stream">
-        {this.state.class ? (
-          <>
-            <div className="class-info">
-              <h1>{this.state.class.name}</h1>
-              <p>Period: {this.state.class.period}</p>
-              <p>Join Code: {this.state.class.id}</p>
-            </div>
-            <form>
-              <input
-                value={this.state.currentPost}
-                type="text"
-                placeholder="Say something to the class"
-                name="currentPost"
-                onChange={this.handleChange}
-              />
-              <button onClick={(e) => this.handleSubmit(e)}>Post</button>
-            </form>
-            {this.state.assignments.length > 0 ? (
-              <>
-                {this.state.assignments.map((assignment, i) => (
-                  <AssignmentCard key={i} assignment={assignment} />
-                ))}
-              </>
-            ) : (
-              <h1>No assignments</h1>
-            )}
-          </>
-        ) : (
-          <h1>Loading...</h1>
-        )}
-      </div>
+      <>
+        <div className="stream">
+          {this.state.class ? (
+            <>
+              <div className="class-info">
+                <h1>{this.state.class.name}</h1>
+                <p>Period: {this.state.class.period}</p>
+                <p>Join Code: {this.state.class.id}</p>
+              </div>
+              <form>
+                <input
+                  value={this.state.currentPost}
+                  type="text"
+                  placeholder="Say something to the class"
+                  name="currentPost"
+                  onChange={this.handleChange}
+                />
+                <button onClick={(e) => this.handleSubmit(e)}>Post</button>
+              </form>
+              {this.state.assignments.length > 0 ? (
+                <>
+                  {this.state.assignments.map((assignment, i) => (
+                    <AssignmentCard key={i} assignment={assignment} />
+                  ))}
+                </>
+              ) : (
+                <h1>No assignments</h1>
+              )}
+            </>
+          ) : (
+            <h1>Loading...</h1>
+          )}
+        </div>
+        <div className="student-list">
+          <h1>Students:</h1>
+          {this.state.students.length > 0 ? (
+            this.state.students.map((student, i) => (
+              <div key={i} style={{'marginBottom': '8%'}}>
+                <h4>{student.name}</h4>
+                <p>{student.email}</p>
+              </div>
+            ))
+          ) : (
+            <h1>no students loaded</h1>
+          )}
+        </div>
+      </>
     );
   }
 }
